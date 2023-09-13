@@ -9,6 +9,7 @@ VERSION=X1
 // pyromapes2k - Base crafting system used in here
 // coruja - Updated to be more OSI compatible
 // ShiryuX - Updated to the scriptpack and tweaked many parts of it
+// Raylde - Update for work with dynamic configuration instead of create new ITEMDEF for each craftable item
 //
 // SCRIPT DOCUMENTATION
 // --------------------
@@ -42,11 +43,18 @@ if <account.resdisp> < <getargv 4 <ctag0.craft.item.options>>
    f_resenddialog d_craft_menu
    return 1
 endif
+
+// if the first material is different from base, then we need to use MATOVERRIDE
+//TODO: need to clean this matoverride stuff
+IF (<def.<ctag0.craft.skill>_material_<dctag.craft.material.<ctag.craft.skill>>_resourceid> != <SERV.ITEMDEF.<args>.RESOURCES.1.KEY.NAME>)
+    TAG.MATOVERRIDE_<def.<ctag0.craft.skill>_resourceid> = <def.<ctag0.craft.skill>_material_<dctag.craft.material.<ctag.craft.skill>>_resourceid>
+ENDIF
+
 if !<canmakeskill <args>>
    ctag.craft.message = <def.scp.craft_msg_noskill>
    f_resenddialog d_craft_menu
    return 1
-elif !<f_canmake <args>>
+elif !<canmake  <args>>
    ctag.craft.message = <def.scp.craft_msg_noresources>
    f_resenddialog d_craft_menu
    return 1
@@ -56,7 +64,20 @@ elif !<isempty <def.<ctag0.craft.skill>_check>>
       return 1
    endif
 endif
-f_makeitem <args>
+makeitem <args>
+craftsuccesschance <args>
+ctag.craft.message = "Creating <serv.itemdef.<args>.name>..."
+ctag.craft.last.<ctag0.craft.skill> = <args>
+if !strcmpi("Cooking","<ctag0.craft.skill>")
+   timerf <eval <serv.skill.13.delay>/10>,craftcooking <args>,<actdiff> // Cooking Fix
+endif
+LOCAL.NewLastTen=<args>
+for 0 9
+   LOCAL.TempItem=<getargv <LOCAL._for> <TAG0.craft.lastTen.<ctag0.craft.skill>>>
+   IF (<LOCAL.TempItem>) && !(STRMATCH(*<LOCAL.TempItem>*,<LOCAL.NewLastTen>))
+      LOCAL.NewLastTen=<LOCAL.NewLastTen>,<LOCAL.TempItem>
+   ENDIF
+endfor
 
 
 [FUNCTION f_craftcooking]
@@ -368,7 +389,7 @@ ELIF (!<ISNEARTYPE t_forge 3>)
 ELIF !<ARGO.ISITEM>
    SYSMESSAGE <DEF.SCP.craft_smelt_notitem>
    RETURN 1
-ELIF (<ARGO.TYPE>==t_ore))
+ELIF (<ARGO.TYPE>==t_ore)
    dclick <argo.uid>
 	RETURN 1
 ELIF (<ARGO.TYPE>==t_clothing) || (<ARGO.ATTR>&attr_magic) || !((<ARGO.ISARMOR>) || (<ARGO.ISWEAPON>) || STRMATCH("*ingot*","<ARGO.RESOURCES.1>"))

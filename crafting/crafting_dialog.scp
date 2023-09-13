@@ -11,6 +11,7 @@ VERSION=X1
  pyromapes2k - Base crafting system used in here
  coruja - Updated to be more OSI compatible
  ShiryuX - Updated to the scriptpack and tweaked many parts of it
+ Raylde - Update for work with dynamic configuration instead of create new ITEMDEF for each craftable item
 
  SCRIPT DOCUMENTATION
  --------------------

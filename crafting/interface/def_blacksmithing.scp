@@ -336,7 +336,7 @@ blacksmithing_material_8_aftercraft      "f_blacksmithing_aftercraft_valorite"
 
 [FUNCTION f_blacksmithing_aftercraft_dull_copper]
 IF <ISARMOR>
-    ARMOR += 2
+    MODAR = 2
     LowerReq = 20
     hitpoints += 50
 ELIF <ISWEAPON>
@@ -346,7 +346,7 @@ ENDIF
 
 [FUNCTION f_blacksmithing_aftercraft_shadow]
 IF <ISARMOR>
-    ARMOR += 4
+    MODAR = 4
     hitpoints += 100
 ELIF <ISWEAPON>
     hitpoints += 50
@@ -354,17 +354,17 @@ ENDIF
 
 [FUNCTION f_blacksmithing_aftercraft_copper]
 IF <ISARMOR>
-    ARMOR += 6
+    MODAR = 6
 ENDIF
 
 [FUNCTION f_blacksmithing_aftercraft_bronze]
 IF <ISARMOR>
-    ARMOR += 8
+    MODAR = 8
 ENDIF
 
 [FUNCTION f_blacksmithing_aftercraft_gold]
 IF <ISARMOR>
-    ARMOR += 10
+    MODAR = 10
     IF !<istevent.ei_equipitem>
         events +ei_equipitem
     ENDIF
@@ -380,17 +380,17 @@ ENDIF
 
 [FUNCTION f_blacksmithing_aftercraft_agapite]
 IF <ISARMOR>
-    ARMOR += 12
+    MODAR = 12
 ENDIF
 
 [FUNCTION f_blacksmithing_aftercraft_verite]
 IF <ISARMOR>
-    ARMOR += 14
+    MODAR = 14
 ENDIF
 
 [FUNCTION f_blacksmithing_aftercraft_valorite]
 IF <ISARMOR>
-    ARMOR += 16
+    MODAR = 16
     hitpoints += 50
 ENDIF
 

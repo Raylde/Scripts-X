@@ -215,31 +215,42 @@ tailoring_material_0_skill	        "Tailoring 0.0"
 tailoring_material_1		        "spined"
 tailoring_material_1_name	        "Spined"
 tailoring_material_1_skill	        "Tailoring 65.0"
-tailoring_material_1_armor_res	    "5,0,0,0,0,f_colored_armor_spined"
-tailoring_material_1_weaps_dam	    "0,0,0,0,0"
 tailoring_material_1_color	        "color_hide_spined"
 tailoring_material_1_resourceid	    "i_hides_cut_spined"
+tailoring_material_1_aftercraft     "f_tailoring_aftercraft_spined"
 
 tailoring_material_2		        "horned"
 tailoring_material_2_name	        "Horned"
 tailoring_material_2_skill	        "Tailoring 80.0"
-tailoring_material_2_armor_res	    "2,3,2,2,2"
-tailoring_material_2_weaps_dam	    "0,0,0,0,0"
 tailoring_material_2_color	        "color_hide_horned"
 tailoring_material_2_resourceid	    "i_hides_cut_horned"
+tailoring_material_2_aftercraft     "f_tailoring_aftercraft_horned"
 
 tailoring_material_3		        "barbed"
 tailoring_material_3_name	        "Barbed"
 tailoring_material_3_skill	        "Tailoring 99.9"
-tailoring_material_3_armor_res	    "2,1,2,3,4"
-tailoring_material_3_weaps_dam	    "0,0,0,0,0"
 tailoring_material_3_color	        "color_hide_barbed"
 tailoring_material_3_resourceid	    "i_hides_cut_barbed"
+tailoring_material_3_aftercraft     "f_tailoring_aftercraft_barbed"
 
-[FUNCTION f_colored_armor_spined]
-if !<istevent.ei_equipitem>
-events +ei_equipitem
-endif
-Luck = <eval <Luck> + 40>
+[FUNCTION f_tailoring_aftercraft_spined]
+IF (<ISARMOR>)
+    MODAR = 10
+    IF !<istevent.ei_equipitem>
+        events +ei_equipitem
+    ENDIF
+    Luck = <eval <Luck> + 40>
+ENDIF
+
+[FUNCTION f_tailoring_aftercraft_horned]
+IF (<ISARMOR>)
+    MODAR = 13
+ENDIF
+
+[FUNCTION f_tailoring_aftercraft_barbed]
+IF (<ISARMOR>)
+    MODAR = 16
+ENDIF
+
 
 [EOF]

@@ -54,7 +54,7 @@ create function to apply attributes to items
 ```
 [FUNCTION f_blacksmithing_aftercraft_eclipse]
 IF (<ISARMOR>)
-    ARMOR += 10
+    MODAR = 10
 ELIF (<ISWEAPON>)
     HITPOINTS += 10
 ENDIF

@@ -396,12 +396,17 @@ ELIF (<ARGO.TYPE>==t_clothing) || (<ARGO.ATTR>&attr_magic) || !((<ARGO.ISARMOR>)
    SYSMESSAGE <DEF.SCP.craft_smelt_notsmeltable>
    RETURN 1
 ELSE
-   LOCAL.AMOUNT=<MULDIV <STRARG <ARGO.RESOURCES.1>>,60,100>
-   SERV.NEWITEM=<STREAT <ARGO.RESOURCES.1>>,<dLOCAL.AMOUNT>
-   NEW.CONT=<ARGO.CONT>
-   ARGO.REMOVE
-   SYSMESSAGE <DEF.SCP.craft_smelt_success>
-   src.f_fireforge
+    LOCAL.RESOURCE = <ARGO.RESOURCES.1>
+    //check if exist TAG.CRAFT.RESOURCE and change the resource if exist
+    IF (!<ISEMPTY <TAG.CRAFT.RESOURCE>>)
+        LOCAL.RESOURCE = <TAG.CRAFT.RESOURCE>
+    ENDIF
+    LOCAL.AMOUNT=<MULDIV <STRARG <ARGO.RESOURCES.1>>,60,100>
+    SERV.NEWITEM=<STREAT <LOCAL.RESOURCE>>,<dLOCAL.AMOUNT>
+    NEW.CONT=<ARGO.CONT>
+    ARGO.REMOVE
+    SYSMESSAGE <DEF.SCP.craft_smelt_success>
+    src.f_fireforge
 ENDIF
 
 [FUNCTION f_craft_cooking_checkfire]

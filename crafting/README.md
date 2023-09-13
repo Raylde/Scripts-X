@@ -7,12 +7,14 @@ blacksmithing_resourceid        "i_ingot_iron" //default material, is the base r
 ```
 
 ## Example
+This is a example of how to create a custom new ore, called Eclipse. This ore can be used to craft armor and weapons. The ore is a colored ore, so the items will be colored with the color of the ore.
+
 add in def_blacksmithing, in the sphere_crafting_blacksmithing_colored  
 ```
 blacksmithing_material_9_name		    "Eclipse"                               // this is the name to display in the gump
 blacksmithing_material_9_skill		    "Blacksmithing 99.0"                    // skill require to access to this material
-blacksmithing_material_9_color		    "color_o_eclipse"                       // color of the material (apply to the item if the colored is enabled)
-blacksmithing_material_9_resourceid	    "0145"                                  // resource id of the material to override the default
+blacksmithing_material_9_color		    "0145"                                  // color of the material (apply to the item if the colored is enabled)
+blacksmithing_material_9_resourceid	    "i_ingot_eclipse"                       // resource id of the material to override the default
 blacksmithing_material_9_aftercraft     "f_blacksmithing_aftercraft_eclipse"    //function to call after craft the item 
 ```
 

@@ -311,14 +311,19 @@ ENDIF
 TARGETF f_craft_blacksmith_repair_targ
 SYSMESSAGE <DEF.SCP.craft_repair_targ>
 
-//TODO: fix resource and the amount.
 //TODO: consume resource if fail to
 [FUNCTION f_craft_blacksmith_repair_targ]
 LOCAL.Max = <argo.more1h>
-LOCAL.Res = <STRARG <ARGO.RESOURCES.1>>
+LOCAL.Res = <STRARG <ARGO.RESOURCES.1.VALUE>>
+LOCAL.ResID = <STRARG <ARGO.RESOURCES.1.KEY>>
 LOCAL.Total = <LOCAL.max>/<LOCAL.res>
 LOCAL.ToRepair = <argo.more1h> - <argo.more1l>
 LOCAL.IngotNeeded = <LOCAL.ToRepair>/<LOCAL.Total>
+
+//override res id if exist
+IF (!<ISEMPTY <ARGO.TAG.CRAFT.RESOURCE>>)
+    LOCAL.ResID = <ARGO.TAG.CRAFT.RESOURCE>
+ENDIF
 
 IF (!<ISNEARTYPE t_forge 3>) || (!<ISNEARTYPE t_anvil 3>)
    CTAG.craft.message=<DEF.SCP.craft_msg_smithrepairneeds>
@@ -348,7 +353,7 @@ IF (<LOCAL.FailedRequirement>)
    RETURN 1
 ENDIF
 
-IF !(<SRC.RESTEST <DLOCAL.IngotNeeded> <STREAT <ARGO.RESOURCES.1>>>)
+IF !(<SRC.RESTEST <DLOCAL.IngotNeeded> <LOCAL.ResID>>)
 	CTAG.Craft.Message=You don't have enough ingots
     f_resenddialog d_craft_menu
 	RETURN 1
@@ -370,7 +375,7 @@ IF (<LOCAL.difficulty> > <R100>)
 ELSE
    ARGO.MORE1L=<ARGO.MORE1H>
    CTAG.craft.message=<DEF.SCP.craft_repair_success>
-   SRC.CONSUME <DLOCAL.IngotNeeded> <STREAT <ARGO.RESOURCES.1>>
+   SRC.CONSUME <DLOCAL.IngotNeeded> <LOCAL.ResID>
    f_resenddialog d_craft_menu
 ENDIF
 RESENDTOOLTIP

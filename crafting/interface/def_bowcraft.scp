@@ -14,7 +14,8 @@ bowcraft_firstmaterial	"1" // 1 or 0
 bowcraft_secondmaterial	"0" // 1 or 0
 bowcraft_options_default	"1,1,0,0,0" //"mark,exceptional,colored,recipe,expansion"
 
-bowcraft_smelt			""
+bowcraft_resourceid				"i_log" //default material
+bowcraft_smelt			        ""
 bowcraft_repair			""
 bowcraft_check			""
 bowcraft_check_notice		""
@@ -60,7 +61,6 @@ bowcraft_category_3_21		"i_assassin_shortbow"
 bowcraft_material_0				""
 bowcraft_material_0_name		"LOG"
 bowcraft_material_0_skill		"Bowcraft 0.0"
-bowcraft_resourceid				"i_log"
 
 bowcraft_material_1				"oak"
 bowcraft_material_1_name		"Oak"

@@ -19,9 +19,10 @@ tailoring_firstmaterial		"1" // 1 or 0
 tailoring_secondmaterial	"0" // 1 or 0
 tailoring_options_default	"1,1,1,0,0" //"mark,exceptional,colored,recipe,expansion"
 
-tailoring_smelt			""
-tailoring_repair		""
-tailoring_check			""
+tailoring_resourceid		        "i_hides_cut" //default material
+tailoring_smelt			    ""
+tailoring_repair		    ""
+tailoring_check			    ""
 tailoring_check_notice		""
 tailoring_chanceatmin		"50.0"
 tailoring_exceptional_bonus	"f_craft_exceptionalbonus"
@@ -210,7 +211,6 @@ tailoring_category_11_15	"i_studded_tunic"
 tailoring_material_0		        ""
 tailoring_material_0_name	        "Leather"
 tailoring_material_0_skill	        "Tailoring 0.0"
-tailoring_resourceid		        "i_hides_cut"
 
 tailoring_material_1		        "spined"
 tailoring_material_1_name	        "Spined"

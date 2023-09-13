@@ -311,6 +311,8 @@ ENDIF
 TARGETF f_craft_blacksmith_repair_targ
 SYSMESSAGE <DEF.SCP.craft_repair_targ>
 
+//TODO: fix resource and the amount.
+//TODO: consume resource if fail to
 [FUNCTION f_craft_blacksmith_repair_targ]
 LOCAL.Max = <argo.more1h>
 LOCAL.Res = <STRARG <ARGO.RESOURCES.1>>
@@ -340,21 +342,25 @@ ELIF (<ARGO.MORE1H> <= 0)
    CTAG.Craft.Message=<DEF.SCP.craft_repair_cannot>
    LOCAL.FailedRequirement=1
 ENDIF
-IF !(<SRC.RESTEST <DLOCAL.IngotNeeded> <STREAT <ARGO.RESOURCES.1>>>)
-	CTAG.Craft.Message=Il vous manque de lingots.
-	LOCAL.FailedRequirement=1
-ENDIF
+
 IF (<LOCAL.FailedRequirement>)
    f_resenddialog d_craft_menu
    RETURN 1
 ENDIF
+
+IF !(<SRC.RESTEST <DLOCAL.IngotNeeded> <STREAT <ARGO.RESOURCES.1>>>)
+	CTAG.Craft.Message=You don't have enough ingots
+    f_resenddialog d_craft_menu
+	RETURN 1
+ENDIF
+
 f_loopanim 11,3,1
 f_loopsound 42,3,1
 LOCAL.difficulty=<EVAL ((((<ARGO.MORE1H> - <ARGO.MORE1L>) * 1250) / <ARGO.MORE1H>) - 250) / 10>
 LOCAL.decrease=<EVAL 30 - (<Blacksmithing> / 33)>
 IF (<LOCAL.decrease> < 0)
    LOCAL.decrease=0
-   ENDIF
+ENDIF
 //LOCAL.decrease += <EVAL {2 4}>
 ARGO.MORE1H=<EVAL (<ARGO.MORE1H> * (100 - <LOCAL.decrease>)) / 100>
 IF (<LOCAL.difficulty> > <R100>)

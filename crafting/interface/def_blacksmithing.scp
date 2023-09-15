@@ -275,124 +275,63 @@ blacksmithing_category_12_2	"i_deed_forge"
 
 [DEFNAME sphere_crafting_blacksmithing_colored]
 blacksmithing_material_0		        ""
-blacksmithing_material_0_name		    "Iron"
+blacksmithing_material_0_name		    "iron"
 blacksmithing_material_0_skill		    "Blacksmithing 0.0"
 
 blacksmithing_material_1			    "dull_copper"
-blacksmithing_material_1_name		    "Dull Copper"
+blacksmithing_material_1_name		    "dull copper"
 blacksmithing_material_1_skill		    "Blacksmithing 65.0"
 blacksmithing_material_1_color		    "color_o_dull_copper"
 blacksmithing_material_1_resourceid	    "i_ingot_dull_copper"
-blacksmithing_material_1_aftercraft     "f_blacksmithing_aftercraft_dull_copper"
+blacksmithing_material_1_aftercraft     "f_resource_ore_aftercraft_dull_copper"
 
 blacksmithing_material_2		        "shadow"
-blacksmithing_material_2_name		    "Shadow"
+blacksmithing_material_2_name		    "shadow"
 blacksmithing_material_2_skill		    "Blacksmithing 70.0"
 blacksmithing_material_2_color		    "color_o_shadow"
 blacksmithing_material_2_resourceid	    "i_ingot_shadow"
-blacksmithing_material_2_aftercraft     "f_blacksmithing_aftercraft_shadow"
+blacksmithing_material_2_aftercraft     "f_resource_ore_aftercraft_shadow"
 
 blacksmithing_material_3		        "copper"
-blacksmithing_material_3_name		    "Copper"
+blacksmithing_material_3_name		    "copper"
 blacksmithing_material_3_skill		    "Blacksmithing 75.0"
 blacksmithing_material_3_color		    "color_o_copper"
 blacksmithing_material_3_resourceid	    "i_ingot_copper"
-blacksmithing_material_3_aftercraft     "f_blacksmithing_aftercraft_copper"
+blacksmithing_material_3_aftercraft     "f_resource_ore_aftercraft_copper"
 
 blacksmithing_material_4			    "bronze"
-blacksmithing_material_4_name		    "Bronze"
+blacksmithing_material_4_name		    "bronze"
 blacksmithing_material_4_skill		    "Blacksmithing 80.0"
 blacksmithing_material_4_color		    "color_o_bronze"
 blacksmithing_material_4_resourceid	    "i_ingot_bronze"
-blacksmithing_material_4_aftercraft     "f_blacksmithing_aftercraft_bronze"
+blacksmithing_material_4_aftercraft     "f_resource_ore_aftercraft_bronze"
 
 blacksmithing_material_5		        "gold"
-blacksmithing_material_5_name		    "Gold"
+blacksmithing_material_5_name		    "gold"
 blacksmithing_material_5_skill		    "Blacksmithing 85.0"
 blacksmithing_material_5_color		    "color_o_gold"
 blacksmithing_material_5_resourceid	    "i_ingot_gold"
-blacksmithing_material_5_aftercraft     "f_blacksmithing_aftercraft_gold"
+blacksmithing_material_5_aftercraft     "f_resource_ore_aftercraft_gold"
 
 blacksmithing_material_6		        "agapite"
-blacksmithing_material_6_name		    "Agapite"
+blacksmithing_material_6_name		    "agapite"
 blacksmithing_material_6_skill		    "Blacksmithing 90.0"
 blacksmithing_material_6_color		    "color_o_agapite"
 blacksmithing_material_6_resourceid	    "i_ingot_agapite"
-blacksmithing_material_6_aftercraft      "f_blacksmithing_aftercraft_agapite"
+blacksmithing_material_6_aftercraft      "f_resource_ore_aftercraft_agapite"
 
 blacksmithing_material_7			    "verite"
-blacksmithing_material_7_name		    "Verite"
+blacksmithing_material_7_name		    "verite"
 blacksmithing_material_7_skill		    "Blacksmithing 95.0"
 blacksmithing_material_7_color		    "color_o_verite"
 blacksmithing_material_7_resourceid		"i_ingot_verite"
-blacksmithing_material_7_aftercraft      "f_blacksmithing_aftercraft_verite"
+blacksmithing_material_7_aftercraft      "f_resource_ore_aftercraft_verite"
 
 blacksmithing_material_8			    "valorite"
-blacksmithing_material_8_name		    "Valorite"
+blacksmithing_material_8_name		    "valorite"
 blacksmithing_material_8_skill		    "Blacksmithing 99.0"
 blacksmithing_material_8_color		    "color_o_valorite"
 blacksmithing_material_8_resourceid    	"i_ingot_valorite"
-blacksmithing_material_8_aftercraft      "f_blacksmithing_aftercraft_valorite"
-
-[FUNCTION f_blacksmithing_aftercraft_dull_copper]
-IF <ISARMOR>
-    MODAR = 2
-    LowerReq = 20
-    hitpoints += 50
-ELIF <ISWEAPON>
-    LowerReq = 50
-    hitpoints += 100
-ENDIF
-
-[FUNCTION f_blacksmithing_aftercraft_shadow]
-IF <ISARMOR>
-    MODAR = 4
-    hitpoints += 100
-ELIF <ISWEAPON>
-    hitpoints += 50
-ENDIF
-
-[FUNCTION f_blacksmithing_aftercraft_copper]
-IF <ISARMOR>
-    MODAR = 6
-ENDIF
-
-[FUNCTION f_blacksmithing_aftercraft_bronze]
-IF <ISARMOR>
-    MODAR = 8
-ENDIF
-
-[FUNCTION f_blacksmithing_aftercraft_gold]
-IF <ISARMOR>
-    MODAR = 10
-    IF !<istevent.ei_equipitem>
-        events +ei_equipitem
-    ENDIF
-    Luck = <eval <Luck> + 40>
-    LowerReq = 30
-ELIF <ISWEAPON>
-    IF !<istevent.ei_equipitem>
-        events +ei_equipitem
-    ENDIF
-    Luck = <eval <Luck> + 40>
-    LowerReq = 50
-ENDIF
-
-[FUNCTION f_blacksmithing_aftercraft_agapite]
-IF <ISARMOR>
-    MODAR = 12
-ENDIF
-
-[FUNCTION f_blacksmithing_aftercraft_verite]
-IF <ISARMOR>
-    MODAR = 14
-ENDIF
-
-[FUNCTION f_blacksmithing_aftercraft_valorite]
-IF <ISARMOR>
-    MODAR = 16
-    hitpoints += 50
-ENDIF
-
+blacksmithing_material_8_aftercraft      "f_resource_ore_aftercraft_valorite"
 
 [EOF]

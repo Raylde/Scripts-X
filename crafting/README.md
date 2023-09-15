@@ -52,7 +52,7 @@ ON=@Create
 
 create function to apply attributes to items
 ```
-[FUNCTION f_blacksmithing_aftercraft_eclipse]
+[FUNCTION f_resource_ore_aftercraft_eclipse]
 IF (<ISARMOR>)
     MODAR = 10
 ELIF (<ISWEAPON>)
@@ -62,7 +62,6 @@ ENDIF
 
 
 ## TODO
-- Blacksmithing smelt need to be fixed to used the correct resource
-- Blacksmithing repair need to be fixed to use the correct resource
 - Tailoring: add repair function (is enabled on AOS)
 - Check EXPANSION in the aftercraft function to see what properties are enabled
+- After check EXPANSION. Add the resistances to each resource

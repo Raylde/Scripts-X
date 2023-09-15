@@ -65,7 +65,7 @@ elif !<isempty <def.<ctag0.craft.skill>_check>>
    endif
 endif
 makeitem <args>
-craftsuccesschance <args>
+f_craftsuccesschance <args>
 ctag.craft.message = "Creating <serv.itemdef.<args>.name>..."
 ctag.craft.last.<ctag0.craft.skill> = <args>
 if !strcmpi("Cooking","<ctag0.craft.skill>")
@@ -97,8 +97,9 @@ f_craftskill cooking
 FOR 1 <SERV.ITEMDEF.<args>.RESOURCES.COUNT>
 	// set the resource_name we can use to check the resource
 	LOCAL.RESOURCE_NAME=<SERV.ITEMDEF.<args>.RESOURCES.<dlocal._for>.KEY.NAME>
+
 	//if is different from base, then we need to check the resource
-	IF (<def.<ctag0.craft.skill>_material_<dctag.craft.material.<ctag.craft.skill>>_resourceid> != <LOCAL.RESOURCE_NAME> )
+	IF (!<ISEMPTY <def.<ctag0.craft.skill>_material_<dctag.craft.material.<ctag.craft.skill>>_resourceid>> && <def.<ctag0.craft.skill>_material_<dctag.craft.material.<ctag.craft.skill>>_resourceid> != <LOCAL.RESOURCE_NAME> )
 		LOCAL.RESOURCE_NAME=<def.<ctag0.craft.skill>_material_<dctag.craft.material.<ctag.craft.skill>>_resourceid>
 	ENDIF
 
@@ -401,23 +402,24 @@ ELIF !<ARGO.ISITEM>
    SYSMESSAGE <DEF.SCP.craft_smelt_notitem>
    RETURN 1
 ELIF (<ARGO.TYPE>==t_ore)
-   dclick <argo.uid>
-	RETURN 1
+    dclick <argo.uid>
+    RETURN 1
 ELIF (<ARGO.TYPE>==t_clothing) || (<ARGO.ATTR>&attr_magic) || !((<ARGO.ISARMOR>) || (<ARGO.ISWEAPON>) || STRMATCH("*ingot*","<ARGO.RESOURCES.1>"))
    SYSMESSAGE <DEF.SCP.craft_smelt_notsmeltable>
    RETURN 1
 ELSE
-    LOCAL.RESOURCE = <ARGO.RESOURCES.1>
+    LOCAL.RESOURCE = <ARGO.RESOURCES.1.KEY>
     //check if exist TAG.CRAFT.RESOURCE and change the resource if exist
-    IF (!<ISEMPTY <TAG.CRAFT.RESOURCE>>)
-        LOCAL.RESOURCE = <TAG.CRAFT.RESOURCE>
+    IF (!<ISEMPTY <ARGO.TAG.CRAFT.RESOURCE>>)
+        LOCAL.RESOURCE = <ARGO.TAG.CRAFT.RESOURCE>
     ENDIF
     LOCAL.AMOUNT=<MULDIV <STRARG <ARGO.RESOURCES.1>>,60,100>
-    SERV.NEWITEM=<STREAT <LOCAL.RESOURCE>>,<dLOCAL.AMOUNT>
+    SERV.NEWITEM=<LOCAL.RESOURCE>,<dLOCAL.AMOUNT>
     NEW.CONT=<ARGO.CONT>
     ARGO.REMOVE
     SYSMESSAGE <DEF.SCP.craft_smelt_success>
     src.f_fireforge
+    f_resenddialog d_craft_menu
 ENDIF
 
 [FUNCTION f_craft_cooking_checkfire]
